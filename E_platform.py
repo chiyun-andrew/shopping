@@ -41,13 +41,15 @@ st.markdown("""
         padding: 0.5rem 1rem;
         transition: all 0.3s ease;
         letter-spacing: 1px;
+        width: 100%;
+        margin-top: auto; /* 讓按鈕自動貼齊卡片底部 */
     }
     .stButton>button:hover {
         background-color: #5c5a56;
         color: #ffffff;
     }
     
-    /* 商品區塊的卡片效果 */
+    /* 商品區塊的卡片效果：改用 Flexbox 確保每張卡片高度一致、按鈕對齊 */
     div[data-testid="column"] {
         background-color: rgba(255, 255, 255, 0.4);
         padding: 1.5rem 1rem;
@@ -55,13 +57,18 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         margin-bottom: 1rem;
         text-align: center;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        height: 100% !important;
     }
     
-    /* 讓所有商品圖片固定高度與等比例填滿，維持按鈕水平對齊 */
+    /* 固定圖片顯示高度，使用 contain 確保百靈油等標示不會被切掉 */
     div[data-testid="column"] img {
-        height: 180px !important;
-        object-fit: cover !important;
+        height: 160px !important;
+        object-fit: contain !important;
         width: 100% !important;
+        margin-bottom: 0.5rem;
     }
     
     /* 優雅的中文小副標題 */
@@ -69,7 +76,7 @@ st.markdown("""
         font-size: 0.85rem;
         color: #8c8a84;
         letter-spacing: 3px;
-        margin-bottom: -10px;
+        margin-bottom: 2px;
         display: block;
     }
     </style>
@@ -172,12 +179,12 @@ if "current_view" not in st.session_state:
     st.session_state.current_view = "shop_list"
 
 # --- 輔助函式：自動產生商品網格與優雅的文字佔位圖 ---
-def render_placeholder(height="180px"):
+def render_placeholder(height="160px"):
     """渲染優雅的無圖片文字佔位區塊"""
     st.markdown(f"""
         <div style='height: {height}; display: flex; align-items: center; justify-content: center; 
                     background-color: rgba(255,255,255,0.2); border: 1px dashed #c4c1b8; 
-                    border-radius: 4px; margin-bottom: 1rem;'>
+                    border-radius: 4px; margin-bottom: 0.5rem;'>
             <span style='color: #a6a49c; letter-spacing: 4px; font-size: 0.9rem;'>【 影像準備中 】</span>
         </div>
     """, unsafe_allow_html=True)
@@ -206,7 +213,6 @@ def render_product_grid(filter_condition, filter_name):
             st.markdown(f"<span class='elegant-subtitle'>{p.get('sub_name', '')}</span>", unsafe_allow_html=True)
             st.markdown(f"**{p['name']}**")
             
-            st.markdown("<br>", unsafe_allow_html=True)
             if st.button("賞 物", key=f"btn_{filter_name}_{key}", use_container_width=True):
                 st.session_state.current_view = key
                 st.rerun()
