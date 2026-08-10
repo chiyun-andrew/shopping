@@ -85,7 +85,7 @@ PRODUCTS = {
     "seal_oil": {
         "name": "挪威頂級深海海豹油",
         "sub_name": "北歐頂級保養",
-        "image": "seel.oil.jpg",
+        "image": "seel.oil.png",
         "category": "europe",
         "is_recommended": False,
         "spec": "容量：120 粒膠囊裝",
