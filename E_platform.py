@@ -57,6 +57,13 @@ st.markdown("""
         text-align: center;
     }
     
+    /* 讓所有商品圖片固定高度與等比例填滿，維持按鈕水平對齊 */
+    div[data-testid="column"] img {
+        height: 180px !important;
+        object-fit: cover !important;
+        width: 100% !important;
+    }
+    
     /* 優雅的中文小副標題 */
     .elegant-subtitle {
         font-size: 0.85rem;
@@ -67,12 +74,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-/* 讓所有商品圖片固定高度與等比例填滿，維持按鈕水平對齊 */
-    div[data-testid="column"] img {
-        height: 180px !important;
-        object-fit: cover !important;
-        width: 100% !important;
-    }
+
 
 # --- 產品資料庫 (對應您上傳的真實圖片檔名) ---
 PRODUCTS = {
