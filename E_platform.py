@@ -42,14 +42,14 @@ st.markdown("""
         transition: all 0.3s ease;
         letter-spacing: 1px;
         width: 100%;
-        margin-top: auto; /* 讓按鈕自動貼齊卡片底部 */
+        margin-top: auto; /* 讓按鈕自動推到底部對齊 */
     }
     .stButton>button:hover {
         background-color: #5c5a56;
         color: #ffffff;
     }
     
-    /* 商品區塊的卡片效果：改用 Flexbox 確保每張卡片高度一致、按鈕對齊 */
+    /* 讓每一行欄位（column）高度一致並改為 Flex 垂直排列 */
     div[data-testid="column"] {
         background-color: rgba(255, 255, 255, 0.4);
         padding: 1.5rem 1rem;
@@ -59,11 +59,17 @@ st.markdown("""
         text-align: center;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important;
         height: 100% !important;
     }
     
-    /* 固定圖片顯示高度，使用 contain 確保百靈油等標示不會被切掉 */
+    /* 讓 Streamlit 欄位內部的容器自動撐開高度 */
+    div[data-testid="column"] > div {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-grow: 1 !important;
+    }
+    
+    /* 固定圖片顯示高度與縮放模式 */
     div[data-testid="column"] img {
         height: 160px !important;
         object-fit: contain !important;
