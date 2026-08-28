@@ -292,3 +292,24 @@ elif st.session_state.current_view in PRODUCTS:
 
     st.subheader("📖 建議用法")
     st.markdown(p["usage"])
+
+    # 若為鵝肝醬詳細頁，則在最下方加入威士忌搭配介紹、優惠與在地習俗
+    if product_key == "foie_gras":
+        st.divider()
+        st.subheader("🍷 老饕私房絕配：威士忌加購企劃")
+        
+        # 顯示威士忌圖片在最下方
+        whisky_img = "whisky.21yr.jpeg"
+        if os.path.exists(whisky_img):
+            st.image(whisky_img, use_container_width=True, caption="蘇格蘭 21 年威士忌（夢幻加購品）")
+        else:
+            render_placeholder(height="200px")
+            
+        st.markdown("""
+        在歐洲高級餐館與當地行家的傳統習俗中，品嚐醇厚濃郁的手工鵝肝醬時，往往會搭配一杯高年份的威士忌。
+        
+        * **脂肪與酒精的完美交織**：威士忌強烈的酒精感與豐富的橡木桶香氣，能夠完美切開鵝肝滑順而豐厚的脂肪，在口中達到絕佳的油脂平衡，化解油膩並帶出深層甘甜。
+        * **限時優惠**：現在只要同時選購「手工鵝肝醬」與「21年威士忌」，即可享有 **10% 折扣（9 折）** 的夢幻餐酒優惠！
+        
+        ⭐ **王子讚賞**：這絕對是美食與美酒激盪出的最高藝術殿堂，層次豐富、尾韻悠長，懂吃的老饕絕對不能錯過這份極致奢華的味蕾饗宴！
+        """)
